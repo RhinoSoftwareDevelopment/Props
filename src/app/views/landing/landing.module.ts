@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialDesignModule } from '../material-design/material-design.module';
 import { LandingComponent } from './landing/landing.component';
+import { LandingRoutingModule } from './landing-routing.module';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { LandingComponent } from './landing/landing.component';
   imports: [
     CommonModule,
     FlexLayoutModule,
-    MaterialDesignModule
+    MaterialDesignModule,
+    LandingRoutingModule
   ],
   exports: [
     LandingComponent
