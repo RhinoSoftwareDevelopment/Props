@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NavigationModule } from './navigation/navigation.module';
 import { RentPropModule } from './rent-prop/rent-prop.module';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { LandingModule } from './landing/landing.module'
 
 @NgModule({
   declarations: [],
@@ -11,12 +12,14 @@ import { AuthenticationModule } from './authentication/authentication.module';
     CommonModule,
     NavigationModule,
     RentPropModule,
-    AuthenticationModule
+    AuthenticationModule,
+    LandingModule,
   ],
   exports: [
     NavigationModule,
     RentPropModule,
-    AuthenticationModule
+    AuthenticationModule,
+    LandingModule,
   ]
 })
 export class ViewsModule { }

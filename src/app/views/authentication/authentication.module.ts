@@ -13,7 +13,8 @@ import { RegisterComponent } from './register/register.component';
     MaterialDesignModule,
     FlexLayoutModule
   ],
-  exports: [ LoginComponent, 
+  exports: [ 
+    LoginComponent, 
     RegisterComponent 
   ]
 })
