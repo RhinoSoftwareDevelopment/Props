@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { NavigationModule } from './navigation/navigation.module';
 import { RentPropModule } from './rent-prop/rent-prop.module';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { LandingModule } from './landing/landing.module'
+import { LandingModule } from './landing/landing.module';
+import { ViewsRoutingModule } from './views-routing.module'
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,7 @@ import { LandingModule } from './landing/landing.module'
     RentPropModule,
     AuthenticationModule,
     LandingModule,
+    ViewsRoutingModule,
   ],
   exports: [
     NavigationModule,
