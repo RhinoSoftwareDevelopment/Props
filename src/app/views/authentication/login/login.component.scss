@@ -1,3 +1,4 @@
+@import "../../../../scss/abstracts/variables.scss";
 .login {
     &__nav {
         background: #fff;
@@ -24,6 +25,7 @@
 
     &__register-link {
         text-decoration: none;
+        color: $color-primary;
     }
 
 }
