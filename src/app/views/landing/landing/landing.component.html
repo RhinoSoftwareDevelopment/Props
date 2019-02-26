@@ -7,7 +7,7 @@
   <div class="container landing__onboarding-message" fxLayout="column">
     <h2 class="mat-headline">¡Bienvenido a BookProp!</h2>
     <p class="mat-body">Reservar escenografía, utilería, vestuarios y todo lo que necesites para tu obra.</p>
-    <button class="landing__button" mat-raised-button color="accent">Iniciar seción</button>
-    <button class="landing__button" mat-stroked-button color="primary">Regístrate</button>
+    <button (click)="goToLogin()" class="landing__button" mat-raised-button color="accent">Iniciar seción</button>
+    <button (click)="goToRegister()" class="landing__button" mat-stroked-button color="primary">Regístrate</button>
   </div>
 </header>
