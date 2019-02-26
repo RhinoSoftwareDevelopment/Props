@@ -4,14 +4,17 @@ import { MaterialDesignModule } from '../material-design/material-design.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     MaterialDesignModule,
     FlexLayoutModule
   ],
-  exports: [ LoginComponent ]
+  exports: [ LoginComponent, 
+    RegisterComponent 
+  ]
 })
 export class AuthenticationModule { }

@@ -1,0 +1,23 @@
+.register {
+    &__nav {
+        background: #fff;
+    }
+
+    &__title {
+        margin: 0 0;
+    }
+
+    &__input {
+        display: block;
+    }
+
+    &__register-link {
+        text-decoration: none;
+        text-transform: capitalize;
+    }
+
+    &__button {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+}

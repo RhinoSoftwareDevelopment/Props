@@ -1,6 +1,6 @@
 .login {
     &__nav {
-        background: #FFF;
+        background: #fff;
     }
 
     &__logo {
@@ -17,4 +17,13 @@
         text-transform: uppercase;
         letter-spacing: 1px;
     }
+
+    &__form {
+        margin-top: -2rem;
+    }
+
+    &__register-link {
+        text-decoration: none;
+    }
+
 }
