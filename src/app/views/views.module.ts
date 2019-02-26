@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NavigationModule } from './navigation/navigation.module';
 import { RentPropModule } from './rent-prop/rent-prop.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   declarations: [],
@@ -10,10 +11,12 @@ import { RentPropModule } from './rent-prop/rent-prop.module';
     CommonModule,
     NavigationModule,
     RentPropModule,
+    AuthenticationModule
   ],
   exports: [
     NavigationModule,
-    RentPropModule
+    RentPropModule,
+    AuthenticationModule
   ]
 })
 export class ViewsModule { }

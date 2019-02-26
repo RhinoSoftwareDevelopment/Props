@@ -1,0 +1,20 @@
+.login {
+    &__nav {
+        background: #FFF;
+    }
+
+    &__logo {
+        display: block;
+        // height: 30rem;
+        max-width:70%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 50%;
+        transform: translateY(-2rem);
+    }
+
+    &__button {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+}
