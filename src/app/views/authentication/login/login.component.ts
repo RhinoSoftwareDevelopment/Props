@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { FacadeService } from 'src/app/services/facade/facade.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private location: Location
+    private location: Location,
+    private facadeService: FacadeService
   ) { }
 
   ngOnInit() {
@@ -29,6 +31,16 @@ export class LoginComponent implements OnInit {
    */
   goToRegister(): void {
     this.gotToComponent('register');
+  }
+
+  /**
+   * Opens a popup to login using facebook.
+   */
+  loginWithFacebook(): void {
+    this.facadeService.authenticationService.googleLogin();
+    this.facadeService.authenticationService.loggedUser$.subscribe(
+      data => console.log(data) // TODO - Errase this log
+    );
   }
 
   /**
