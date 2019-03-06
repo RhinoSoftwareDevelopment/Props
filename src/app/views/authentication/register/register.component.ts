@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { FacadeService } from 'src/app/services/facade/facade.service';
-import { log } from 'util';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +13,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router: Router,
     private location: Location,
-    private facadeService: FacadeService
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -38,8 +37,8 @@ export class RegisterComponent implements OnInit {
    * Opens a popup to register using facebook.
    */
   registerWithFacebook(): void {
-    this.facadeService.authenticationService.googleLogin();
-    this.facadeService.authenticationService.loggedUser$.subscribe(
+    this.authenticationService.googleLogin();
+    this.authenticationService.loggedUser$.subscribe(
       data => console.log(data) // TODO - Errase this log
     );
   }

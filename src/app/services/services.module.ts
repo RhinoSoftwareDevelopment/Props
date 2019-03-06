@@ -9,7 +9,7 @@ import { AngularFirestore, FirestoreSettingsToken } from '@angular/fire/firestor
 import { environment } from '../../environments/environment';
 
 
-import { FacadeService } from './facade/facade.service'
+import { AuthenticationService } from './authentication/authentication.service'
 
 @NgModule({
   declarations: [],
@@ -20,7 +20,7 @@ import { FacadeService } from './facade/facade.service'
     AngularFireAuthModule
   ],
   providers: [
-    FacadeService,
+    AuthenticationService,
     AngularFirestore,
     { provide: FirestoreSettingsToken, useValue: {} }
   ]
