@@ -3,15 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { AuthenticationRoutingModule } from './authentication/authentication-routing.module';
 import { LandingRoutingModule } from './landing/landing-routing.module';
+import { RentPropRoutingModule } from './rent-prop/rent-prop-routing.module';
 
 @NgModule({
   imports: [
     AuthenticationRoutingModule,
-    LandingRoutingModule
+    LandingRoutingModule,
+    RentPropRoutingModule
   ],
   exports: [
     AuthenticationRoutingModule,
-    LandingRoutingModule
+    LandingRoutingModule,
+    RentPropRoutingModule
   ]
 })
 export class ViewsRoutingModule { }
