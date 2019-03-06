@@ -1,7 +1,7 @@
 <mat-card class="product-card">
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <img mat-card-image [src]="article.picture_path" [alt]="article.name">
   <mat-card-header>
-    <mat-card-title>Silla</mat-card-title>
-    <mat-card-subtitle>Depósito 2</mat-card-subtitle>
+    <mat-card-title>{{ article.name }}</mat-card-title>
+    <mat-card-subtitle class="product-card__subtitle">{{ getWarehouseName() }}</mat-card-subtitle>
   </mat-card-header>
 </mat-card>
