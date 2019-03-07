@@ -30,5 +30,5 @@ script:
   - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
   - ng build --prod
 
-deploy:
+after_success:
   - firebase deploy --token $FIREBASE_TOKEN
