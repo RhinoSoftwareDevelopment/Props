@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CatalogComponent } from './catalog.component';
+import { NavigationModule } from '../../navigation/navigation.module';
+import { MaterialDesignModule } from '../../material-design/material-design.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 describe('CatalogComponent', () => {
   let component: CatalogComponent;
@@ -8,6 +11,11 @@ describe('CatalogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        NavigationModule,
+        MaterialDesignModule,
+        FlexLayoutModule
+      ],
       declarations: [ CatalogComponent ]
     })
     .compileComponents();
@@ -19,7 +27,4 @@ describe('CatalogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

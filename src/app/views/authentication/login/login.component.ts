@@ -10,6 +10,8 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 })
 export class LoginComponent implements OnInit {
 
+  hide = true;
+
   constructor(
     private router: Router,
     private location: Location,
