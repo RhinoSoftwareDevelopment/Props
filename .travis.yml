@@ -27,7 +27,7 @@ install:
  
 script:
   - ng lint
-  - - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+  - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
   - ng build --prod
 
 after_success:
