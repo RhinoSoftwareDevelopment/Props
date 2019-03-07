@@ -15,16 +15,16 @@ export class ProductCardComponent implements OnInit {
 
   /**
    * Returns a string with the warehouse name.
-   * This method should be using an enum, or a 
+   * This method should be using an enum, or a
    * more elegant way, but for now is ok.
    */
-  getWarehouseName():string {
+  getWarehouseName(): string {
     switch (this.article.warehouse_id) {
-      case 1: return "Bodega aula múltiple";
-      case 2: return "Depósito 2";
-      case 3: return "Depósito 5";
-      case 4: return "Bodega camerino";
-      default: "Bodega no especificada";
+      case 1: return 'Bodega aula múltiple';
+      case 2: return 'Depósito 2';
+      case 3: return 'Depósito 5';
+      case 4: return 'Bodega camerino';
+      default: return 'Bodega no especificada';
     }
   }
 

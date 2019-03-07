@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFirestore, FirestoreSettingsToken } from '@angular/fire/firestore'
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestore, FirestoreSettingsToken } from '@angular/fire/firestore';
 
 import { environment } from '../../environments/environment';
 
 
-import { AuthenticationService } from './authentication/authentication.service'
+import { AuthenticationService } from './authentication/authentication.service';
 
 @NgModule({
   declarations: [],

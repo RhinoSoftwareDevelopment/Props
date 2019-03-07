@@ -18,9 +18,9 @@ describe('RegisterComponent', () => {
         FlexLayoutModule,
         AuthenticationRoutingModule,
       ],
-      declarations: [ 
+      declarations: [
         RegisterComponent,
-        LoginComponent 
+        LoginComponent
       ],
     })
     .compileComponents();
