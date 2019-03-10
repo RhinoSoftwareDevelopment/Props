@@ -10,6 +10,8 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 })
 export class LoginComponent implements OnInit {
 
+  hide = false;
+
   constructor(
     private router: Router,
     private location: Location,
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit {
     try {
       this.location.back();
     } catch (e) {
-      console.error('Cannot go back.')
+      console.error('Cannot go back.');
     }
   }
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 import { auth } from 'firebase/app';
-import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore'
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { User } from '../../shared/user.model';
 import { Observable, of } from 'rxjs';
@@ -20,18 +20,17 @@ export class AuthenticationService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
-  ) { 
+  ) {
     // this.loggedUser$ = this.afAuth.authState;
     this.loggedUser$ = this.afAuth.authState.pipe(
       switchMap(user => {
-        if(user) {
+        if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
       })
     );
-    // this.checkIfUserIsLoggedIn(); 
   }
 
   /**
@@ -64,7 +63,7 @@ export class AuthenticationService {
   }
 
   /**
-   * If the user is logged in, we add the user's data to the browser's 
+   * If the user is logged in, we add the user's data to the browser's
    * local storage; otherwise we store a null user
    */
   // private checkIfUserIsLoggedIn(): void {

@@ -6,10 +6,11 @@ import { environment } from '../environments/environment';
 
 import { AngularFireModule } from '@angular/fire';
 
-import { ViewsModule } from './views/views.module'
-import { ViewsRoutingModule } from './views/views-routing.module'
+import { ViewsModule } from './views/views.module';
+import { ViewsRoutingModule } from './views/views-routing.module';
 
 import { ServicesModule } from './services/services.module';
+import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -24,7 +25,10 @@ import { ServicesModule } from './services/services.module';
     ServicesModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

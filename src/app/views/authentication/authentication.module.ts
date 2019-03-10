@@ -15,9 +15,9 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
     FlexLayoutModule,
     AuthenticationRoutingModule
   ],
-  exports: [ 
-    LoginComponent, 
-    RegisterComponent 
+  exports: [
+    LoginComponent,
+    RegisterComponent
   ]
 })
 export class AuthenticationModule { }

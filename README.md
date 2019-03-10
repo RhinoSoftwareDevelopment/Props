@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/RhinoSoftwareDevelopment/Props.svg?branch=master)](https://travis-ci.com/RhinoSoftware
 # Props
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
