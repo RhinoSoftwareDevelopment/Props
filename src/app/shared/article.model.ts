@@ -4,4 +4,5 @@ export interface Article {
     name: string;
     picture_path?: string;
     warehouse_id: number; // TODO - Can be change to an enum.
+    id?: string; // TODO - Remove optional.
 }

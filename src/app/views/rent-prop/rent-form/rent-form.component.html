@@ -1,0 +1,37 @@
+<app-navbar navbarTittle="Formulario"></app-navbar>
+<ng-container *ngIf="articleToRent">
+    <div fxLayout="column" fxLayoutAlign="center center" class="container rent-form">
+        <img class="rent-form__article-photo" [src]="articleToRent.picture_path" [alt]="articleToRent.name">
+        <form class="rent-form__form" action="" fxLayout="column" fxLayoutGap="0px" [formGroup]="rentArticleForm" (ngSubmit)="sendRequest()">
+            <mat-form-field appearance="fill" fxFlexFill>
+                <mat-label>Docente a Cargo</mat-label>
+                <input type="text" matInput placeholder="Docente a Cargo" formControlName="professor_incharge" [matAutocomplete]="auto" required>
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field appearance="fill" fxFlexFill>
+                <mat-label>Proyecto Asociado</mat-label>
+                <input type="text" matInput placeholder="Proyecto Asociado" formControlName="proyect" required>
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutGap="10px">
+                <mat-form-field appearance="fill" fxFlex="calc(50%-10px)">
+                    <mat-label>Prestamo</mat-label>
+                    <input matInput [matDatepicker]="begin" placeholder="Prestamo" formControlName="begin" required>
+                    <mat-datepicker-toggle matSuffix [for]="begin"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #begin></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="fill" fxFlex="calc(50%-10px)">
+                    <mat-label>Devolución</mat-label>
+                    <input matInput [matDatepicker]="end" placeholder="Devolución" formControlName="end" required>
+                    <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #end></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <button mat-raised-button color="accent" type="submit" class="rent-form__button" [disabled]="!rentArticleForm.valid">Enviar solicitud</button>
+        </form>
+    </div>
+</ng-container>
+

@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+
+.rent-form {
+    &__article-photo {
+        border-radius: 4px;
+        max-height: 18rem;
+        @include mat-elevation(5);
+    }
+    
+    &__form {
+        margin: 1rem 0;
+        width: 100%;
+    }
+
+    &__button {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+}

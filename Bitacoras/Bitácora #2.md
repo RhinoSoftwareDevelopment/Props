@@ -1,6 +1,6 @@
 # Bitácora #2
 
-**Fecha: **Febrero 1/2019
+**Fecha:** Febrero 1/2019
 
 ## Agenda
 
