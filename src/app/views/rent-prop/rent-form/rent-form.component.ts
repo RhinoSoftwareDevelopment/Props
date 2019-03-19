@@ -1,10 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/shared/article.model';
+import { PropRequest } from 'src/app/shared/request.model';
 import { ActivatedRoute } from '@angular/router';
 import { ArticlesService } from 'src/app/services/articles/articles.service';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
+import { RequestService } from 'src/app/services/request/request.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-rent-form',
@@ -22,12 +25,16 @@ export class RentFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private articlesService: ArticlesService,
+    private requestsService: RequestService,
+    private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.buildRentArticleForm();
     this.route.params.subscribe(params => {
+      console.log(params);
+      
       this.articlesService.getArticleById(params.id)
         .subscribe(article => this.articleToRent = article)
     });
@@ -41,8 +48,11 @@ export class RentFormComponent implements OnInit {
    * Sends the request to the backend.
    */
   sendRequest(): void {
-    const request = this.rentArticleForm.value as Request;
-    console.log(request);
+    const request = this.rentArticleForm.value as PropRequest;
+    this.authenticationService.getLoggedUser().subscribe(user => {
+      request.uid = user.uid
+      this.requestsService.addRequest(request);
+    })
     
   }
 
