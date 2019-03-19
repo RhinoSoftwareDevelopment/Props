@@ -3,4 +3,5 @@ export interface Request {
     proyect: string;
     begin: Date;
     end: Date;
+    articleId: string;
 }
