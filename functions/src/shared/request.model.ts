@@ -1,4 +1,4 @@
-import { RequestState } from './request-state.enum';
+import { RequestState } from "./request-state.enum";
 
 export interface PropRequest {
     professor_incharge: string;

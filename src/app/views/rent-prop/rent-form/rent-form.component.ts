@@ -34,9 +34,8 @@ export class RentFormComponent implements OnInit {
     this.buildRentArticleForm();
     this.route.params.subscribe(params => {
       console.log(params);
-      
       this.articlesService.getArticleById(params.id)
-        .subscribe(article => this.articleToRent = article)
+        .subscribe(article => this.articleToRent = article);
     });
     this.filteredOptions = this.rentArticleForm.controls['professor_incharge'].valueChanges.pipe(
       startWith(''),
@@ -51,8 +50,9 @@ export class RentFormComponent implements OnInit {
     const request = this.rentArticleForm.value as PropRequest;
     this.authenticationService.getLoggedUser().subscribe(user => {
       request.uid = user.uid
+      request.articleId = this.articleToRent.id;
       this.requestsService.addRequest(request);
-    })
+    });
     
   }
 
