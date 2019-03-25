@@ -1,6 +1,6 @@
 # Bitácora #1
 
-**Fecha: **Enero 24/2019
+**Fecha:** Enero 24/2019
 
 ## Agenda
 

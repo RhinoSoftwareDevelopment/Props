@@ -63,6 +63,13 @@ export class AuthenticationService {
   }
 
   /**
+   * Gets logged user information
+   */
+  getLoggedUser(): Observable<User> {
+    return this.loggedUser$;
+  }
+
+  /**
    * If the user is logged in, we add the user's data to the browser's
    * local storage; otherwise we store a null user
    */

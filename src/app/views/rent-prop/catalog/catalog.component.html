@@ -1,12 +1,10 @@
-<app-navbar></app-navbar>
-<div class="catalog" fxLayout="row wrap">
+<app-navbar navbarTittle="Artículos" [withSearchButton]="false"></app-navbar>
+<div class="masonry-layout">
     <ng-container *ngIf="articles">
         <ng-container *ngFor="let article of articles">
-            <app-product-card
-                [article]="article"
-                fxFlex="0 1 25%"
-                fxFlex.lt-md="0 1 50%">
-            </app-product-card>
+            <div class="masonry-layout-panel">
+                <app-product-card (click)="goToRentPropForm(article)" [article]="article"></app-product-card>
+            </div>
         </ng-container>
     </ng-container>
 </div>

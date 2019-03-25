@@ -1,0 +1,9 @@
+<mat-card class="request" [ngClass]="getCardStateColor()" *ngIf="articleToRent">
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+      <img fxFlex="30%" class="request__img" [src]="articleToRent.picture_path" [alt]="articleToRent.name ">
+    <div class="request__info" fxFlex>
+      <mat-card-title>{{ articleToRent.name }}</mat-card-title>
+      <mat-card-subtitle>{{ getWarehouseName() }}</mat-card-subtitle>
+    </div>
+  </div>
+</mat-card>
