@@ -47,7 +47,7 @@ export class RequestService {
    */
   private getUid(): void {
     this.afAuth.authState.subscribe(user => {
-      if(user) {
+      if (user) {
         this.userId = user.uid;
       }
     });
