@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +9,18 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   @Input() navbarTittle: string;
+  @Input() withBackButton: boolean;
+  @Input() withSearchButton: boolean;
 
-  constructor() { }
+  constructor(private location: Location) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  /**
+   * Goes back to the last page.
+   */
+  goBack() {
+    this.location.back();
   }
 
 }

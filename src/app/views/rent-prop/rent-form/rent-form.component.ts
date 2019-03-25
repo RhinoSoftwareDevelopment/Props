@@ -16,10 +16,11 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 })
 export class RentFormComponent implements OnInit {
 
+  private articleToRentId: string;
+
   articleToRent: Article;
   faculty_teachers: string[] = ['Anna', 'Bob', 'Carly', 'Dorian', 'Elena'];
   filteredOptions: Observable<string[]>;
-
   rentArticleForm: FormGroup;
 
   constructor(
@@ -33,7 +34,7 @@ export class RentFormComponent implements OnInit {
   ngOnInit() {
     this.buildRentArticleForm();
     this.route.params.subscribe(params => {
-      console.log(params);
+      this.articleToRentId = params['id'];
       this.articlesService.getArticleById(params.id)
         .subscribe(article => this.articleToRent = article);
     });
@@ -49,15 +50,14 @@ export class RentFormComponent implements OnInit {
   sendRequest(): void {
     const request = this.rentArticleForm.value as PropRequest;
     this.authenticationService.getLoggedUser().subscribe(user => {
-      request.uid = user.uid
-      request.articleId = this.articleToRent.id;
+      request.uid = user.uid;
+      request.articleId = this.articleToRentId;
       this.requestsService.addRequest(request);
     });
-    
   }
 
   /**
-   * Filters the array of techers and leaves only the ones 
+   * Filters the array of techers and leaves only the ones
    * that contain the string passed as paramenter.
    * @param value substring to find in all teachers
    */

@@ -1,4 +1,4 @@
-<app-navbar navbarTittle="Artículos"></app-navbar>
+<app-navbar navbarTittle="Artículos" [withSearchButton]="false"></app-navbar>
 <div class="catalog" fxLayout="row wrap">
     <ng-container *ngIf="articles">
         <ng-container *ngFor="let article of articles">

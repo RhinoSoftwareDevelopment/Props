@@ -2,10 +2,16 @@
   <nav fxLayout="row" fxLayoutAlign="space-around center">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <mat-icon>dehaze</mat-icon>
+        <ng-container *ngIf="withBackButton; else elseTemplate">
+          <mat-icon  (click)="goBack()">arrow_back</mat-icon>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <mat-icon>dehaze</mat-icon>
+        </ng-template>
+        
         <span class="navbar__tittle">{{ navbarTittle }}</span>
         <div fxFlex fxLayout="row" fxLayoutAlign="end">
-            <mat-icon>search</mat-icon>
+            <mat-icon *ngIf="withSearchButton">search</mat-icon>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>

@@ -1,4 +1,4 @@
-<app-navbar navbarTittle="Formulario"></app-navbar>
+<app-navbar navbarTittle="Formulario" [withBackButton]="true" [withSearchButton]="false"></app-navbar>
 <ng-container *ngIf="articleToRent">
     <div fxLayout="column" fxLayoutAlign="center center" class="container rent-form">
         <img class="rent-form__article-photo" [src]="articleToRent.picture_path" [alt]="articleToRent.name">

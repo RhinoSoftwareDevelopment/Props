@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AuthenticationService } from '../authentication/authentication.service';
 import { PropRequest } from 'src/app/shared/request.model';
 import { Router } from '@angular/router';
 
@@ -49,7 +48,7 @@ export class RequestService {
   private getUid(): void {
     this.afAuth.authState.subscribe(user => {
       if(user) {
-        this.userId = user.uid; 
+        this.userId = user.uid;
       }
     });
   }
