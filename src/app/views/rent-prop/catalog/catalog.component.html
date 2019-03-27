@@ -1,10 +1,14 @@
-<app-navbar navbarTittle="Artículos" [withSearchButton]="false"></app-navbar>
-<div class="masonry-layout">
-    <ng-container *ngIf="articles">
-        <ng-container *ngFor="let article of articles">
-            <div class="masonry-layout-panel">
-                <app-product-card (click)="goToRentPropForm(article)" [article]="article"></app-product-card>
-            </div>
+<app-navbar navbarTittle="Artículos" [withSearchButton]="false">
+
+    
+    
+    <div class="masonry-layout">
+        <ng-container *ngIf="articles">
+            <ng-container *ngFor="let article of articles">
+                <div class="masonry-layout-panel">
+                    <app-product-card (click)="goToRentPropForm(article)" [article]="article"></app-product-card>
+                </div>
+            </ng-container>
         </ng-container>
-    </ng-container>
-</div>
+    </div>
+</app-navbar>
