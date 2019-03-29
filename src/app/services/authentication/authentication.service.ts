@@ -34,7 +34,7 @@ export class AuthenticationService {
       })
     );
     this.isLoggedIn$ = this.afAuth.authState
-      .pipe(map<firebase.User, boolean>(user => { return user != null; }) );
+      .pipe(map<firebase.User, boolean>(user => user != null) );
   }
 
   /**

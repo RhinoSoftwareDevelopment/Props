@@ -40,7 +40,7 @@ export class RentFormComponent implements OnInit {
         .subscribe(article => this.articleToRent = article);
     });
     this.teachersService.getTeachers().subscribe(teachers => {
-      for(let teacher of teachers) {
+      for (const teacher of teachers) {
         this.faculty_teachers.push(teacher.name);
       }
     });

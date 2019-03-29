@@ -13,7 +13,7 @@ export class TeachersService {
 
   constructor(
     private afs: AngularFirestore,
-  ) { 
+  ) {
     this.teachersCollection = this.afs.collection<Teacher>(this.TEACHERS_COLLECTION_NAME);
   }
 

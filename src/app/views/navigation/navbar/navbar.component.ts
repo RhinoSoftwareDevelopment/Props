@@ -20,11 +20,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   loggedUser: User;
 
   constructor(
-    private location: Location, 
+    private location: Location,
     private router: Router,
     private authenticationService: AuthenticationService) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.loggedInUserSubscription = this.authenticationService.getLoggedUser().subscribe(user => this.loggedUser = user);
   }
 
@@ -53,6 +53,4 @@ export class NavbarComponent implements OnInit, OnDestroy {
   logout(): void {
     this.authenticationService.logout();
   }
-    
-
 }

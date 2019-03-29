@@ -19,8 +19,6 @@ export class MyRequestsComponent implements OnInit {
     this.requestServices.getRequests().subscribe(
       request => {
         this.requests = request;
-        console.log(this.requests);
-        
       });
   }
 
