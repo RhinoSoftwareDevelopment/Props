@@ -7,7 +7,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 
 import { User } from '../../shared/user.model';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,7 @@ import { switchMap } from 'rxjs/operators';
 export class AuthenticationService {
 
   loggedUser$: Observable<User>;
+  isLoggedIn$: Observable<boolean>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -25,12 +26,15 @@ export class AuthenticationService {
     this.loggedUser$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
+          sessionStorage.setItem('uid', user.uid);
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
       })
     );
+    this.isLoggedIn$ = this.afAuth.authState
+      .pipe(map<firebase.User, boolean>(user => { return user != null; }) );
   }
 
   /**
@@ -48,7 +52,11 @@ export class AuthenticationService {
    * Signs out of firebase.
    */
   async logout(): Promise<boolean> {
+    console.log('To Sign out');
+    this.loggedUser$.subscribe().unsubscribe();
+    this.isLoggedIn$.subscribe().unsubscribe();
     await this.afAuth.auth.signOut();
+    sessionStorage.clear();
     return this.router.navigate(['/']);
   }
 

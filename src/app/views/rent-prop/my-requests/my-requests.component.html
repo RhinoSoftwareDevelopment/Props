@@ -1,8 +1,9 @@
-<app-navbar navbarTittle="Solicitudes"></app-navbar>
-<div class="container">
-  <ng-container *ngFor="let request of requests">
-    <div class="request__card">
-      <app-request-card [request]="request" ></app-request-card>
-    </div>
-  </ng-container>
-</div>
+<app-navbar navbarTittle="Mis Solicitudes">
+  <div class="container">
+    <ng-container *ngFor="let request of requests">
+      <div class="request__card">
+        <app-request-card [request]="request"></app-request-card>
+      </div>
+    </ng-container>
+  </div>
+</app-navbar>

@@ -1,30 +1,48 @@
-<nav fxLayout="row" fxLayoutAlign="space-around center" (swiperight)="snav.opened = true" (swipeleft)="snav.opened = false" >
+<nav fxLayout="row" fxLayoutAlign="space-around center" (swiperight)="snav.opened = true"
+  (swipeleft)="snav.opened = false">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <ng-container *ngIf="withBackButton; else elseTemplate">
-        <mat-icon  (click)="goBack()">arrow_back</mat-icon>
+        <mat-icon (click)="goBack()">arrow_back</mat-icon>
       </ng-container>
       <ng-template #elseTemplate>
-        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <button mat-icon-button (click)="snav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
       </ng-template>
-      
+
       <span class="navbar__tittle">{{ navbarTittle }}</span>
       <div fxFlex fxLayout="row" fxLayoutAlign="end">
-          <mat-icon *ngIf="withSearchButton">search</mat-icon>
+        <mat-icon *ngIf="withSearchButton">search</mat-icon>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
 </nav>
 <mat-sidenav-container class="navbar" (swipeleft)="snav.opened = false">
 
-  <mat-sidenav #snav mode="push" [fixedInViewport]="true" fixedTopGap="56">
-    <mat-nav-list >
-      <a mat-list-item> <mat-icon>shopping_cart</mat-icon>Catálogo</a>
-      <a mat-list-item> <mat-icon>notifications_active</mat-icon>Mis Solicitudes</a>
-      <a mat-list-item> <mat-icon>vpn_key</mat-icon>Logout</a>
+  <mat-sidenav #snav mode="push" [fixedInViewport]="true" fixedTopGap="56" class="sidenav__list">
+    <div class="sidenav__container" fxLayout="column" fxLayoutAlign="space-around stretch">
+      <h2 *ngIf="loggedUser" class="mat-h2 sidenav__title"> {{loggedUser.displayName}}</h2>
+      <h3 class="mat-h4">Estudiente</h3>
+    </div>
+    <mat-nav-list>
+      <a [routerLink]="['/catalog']" mat-list-item (click)="snav.toggle()" routerLinkActive="sidenav__link--active">
+        <mat-icon class="sidenav__icon">shopping_cart</mat-icon>Catálogo
+      </a>
+      <a [routerLink]="['/requests']" mat-list-item (click)="snav.toggle()" routerLinkActive="sidenav__link--active">
+        <mat-icon class="sidenav__icon">notifications_active</mat-icon>Mis Solicitudes
+      </a>
+      <a mat-list-item (click)="snav.toggle(); logout()">
+        <mat-icon class="sidenav__icon">vpn_key</mat-icon>Logout
+      </a>
     </mat-nav-list>
+    <div class="sidenav__container sidenav__credits"> 
+      <h3 class="mat-h4 sidenav__title">Creado Por:</h3>
+      <h2 class="mat-h2 sidenav__title"> Rhino Software Development</h2>
+      <h3 class="mat-h4 sidenav__title">Hacemos tus ideas realidad.</h3>
+    </div>
   </mat-sidenav>
-  
+
   <mat-sidenav-content (swiperight)="snav.opened = true">
     <ng-content></ng-content>
   </mat-sidenav-content>
