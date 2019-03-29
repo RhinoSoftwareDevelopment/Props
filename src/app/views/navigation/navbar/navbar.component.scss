@@ -1,5 +1,37 @@
+@import "../../../../scss/abstracts/variables.scss";
 .navbar {
-    &__tittle {
-        margin-left: 2.25rem;
+  &__tittle {
+    margin-left: 2.25rem;
+  }
+}
+
+.sidenav {
+  &__list {
+    width: 80vw;
+  }
+  &__icon {
+    margin: 0 1rem;
+  }
+
+  &__container {
+    padding: 1rem;
+  }
+
+  &__link {
+    &--active {
+      background-color: rgba($color-primary-super-light, 0.3);
+      color: $color-primary-dark;
     }
+  }
+
+  &__title {
+    margin-bottom: 0rem;
+  }
+  
+  &__credits {
+    color: $color-secondary-text;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+  }
 }

@@ -16,7 +16,10 @@ export class MyRequestsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.requestServices.getRequests().subscribe(request => this.requests = request);
+    this.requestServices.getRequests().subscribe(
+      request => {
+        this.requests = request;
+      });
   }
 
 }

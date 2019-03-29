@@ -40,9 +40,6 @@ export class LoginComponent implements OnInit {
    */
   loginWithFacebook(): void {
     this.authenticationService.googleLogin();
-    this.authenticationService.loggedUser$.subscribe(
-      data => console.log(data) // TODO - Errase this log
-    );
   }
 
   /**

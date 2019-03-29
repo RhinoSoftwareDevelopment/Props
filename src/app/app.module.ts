@@ -11,6 +11,7 @@ import { ViewsRoutingModule } from './views/views-routing.module';
 
 import { ServicesModule } from './services/services.module';
 import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { AuthGuard } from './auth/auth.guard';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

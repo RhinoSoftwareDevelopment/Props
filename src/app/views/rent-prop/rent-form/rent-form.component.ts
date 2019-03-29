@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { RequestService } from 'src/app/services/request/request.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { TeachersService } from 'src/app/services/teachers/teachers.service';
 
 @Component({
   selector: 'app-rent-form',
@@ -19,7 +20,7 @@ export class RentFormComponent implements OnInit {
   private articleToRentId: string;
 
   articleToRent: Article;
-  faculty_teachers: string[] = ['Anna', 'Bob', 'Carly', 'Dorian', 'Elena'];
+  faculty_teachers: string[] = [];
   filteredOptions: Observable<string[]>;
   rentArticleForm: FormGroup;
 
@@ -27,7 +28,7 @@ export class RentFormComponent implements OnInit {
     private route: ActivatedRoute,
     private articlesService: ArticlesService,
     private requestsService: RequestService,
-    private authenticationService: AuthenticationService,
+    private teachersService: TeachersService,
     private formBuilder: FormBuilder
   ) { }
 
@@ -37,6 +38,11 @@ export class RentFormComponent implements OnInit {
       this.articleToRentId = params['id'];
       this.articlesService.getArticleById(params.id)
         .subscribe(article => this.articleToRent = article);
+    });
+    this.teachersService.getTeachers().subscribe(teachers => {
+      for (const teacher of teachers) {
+        this.faculty_teachers.push(teacher.name);
+      }
     });
     this.filteredOptions = this.rentArticleForm.controls['professor_incharge'].valueChanges.pipe(
       startWith(''),
@@ -49,11 +55,9 @@ export class RentFormComponent implements OnInit {
    */
   sendRequest(): void {
     const request = this.rentArticleForm.value as PropRequest;
-    this.authenticationService.getLoggedUser().subscribe(user => {
-      request.uid = user.uid;
-      request.articleId = this.articleToRentId;
-      this.requestsService.addRequest(request);
-    });
+    request.uid = sessionStorage.getItem('uid');
+    request.articleId = this.articleToRentId;
+    this.requestsService.addRequest(request);
   }
 
   /**
