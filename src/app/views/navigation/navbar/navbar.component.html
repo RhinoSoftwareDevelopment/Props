@@ -1,5 +1,4 @@
-<nav fxLayout="row" fxLayoutAlign="space-around center" (swiperight)="snav.opened = true"
-  (swipeleft)="snav.opened = false">
+<nav fxLayout="row" fxLayoutAlign="space-around center">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <ng-container *ngIf="withBackButton; else elseTemplate">
@@ -18,7 +17,7 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </nav>
-<mat-sidenav-container class="navbar" (swipeleft)="snav.opened = false">
+<mat-sidenav-container class="navbar">
 
   <mat-sidenav #snav mode="push" [fixedInViewport]="true" fixedTopGap="56" class="sidenav__list">
     <div class="sidenav__container" fxLayout="column" fxLayoutAlign="space-around stretch">
@@ -32,21 +31,22 @@
       <a [routerLink]="['/requests']" mat-list-item (click)="snav.toggle()" routerLinkActive="sidenav__link--active">
         <mat-icon class="sidenav__icon">notifications_active</mat-icon>Mis Solicitudes
       </a>
-      <a [routerLink]="['/admin/submissions']" mat-list-item (click)="snav.toggle()" routerLinkActive="sidenav__link--active">
+      <a [routerLink]="['/admin/submissions']" mat-list-item (click)="snav.toggle()"
+        routerLinkActive="sidenav__link--active">
         <mat-icon class="sidenav__icon">toys</mat-icon>Admin
       </a>
       <a mat-list-item (click)="snav.toggle(); logout()">
         <mat-icon class="sidenav__icon">vpn_key</mat-icon>Logout
       </a>
     </mat-nav-list>
-    <div class="sidenav__container sidenav__credits"> 
+    <div class="sidenav__container sidenav__credits">
       <h3 class="mat-h4 sidenav__title">Creado Por:</h3>
       <h2 class="mat-h2 sidenav__title"> Rhino Software Development</h2>
       <h3 class="mat-h4 sidenav__title">Hacemos tus ideas realidad.</h3>
     </div>
   </mat-sidenav>
 
-  <mat-sidenav-content (swiperight)="snav.opened = true">
+  <mat-sidenav-content>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
