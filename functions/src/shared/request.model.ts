@@ -8,4 +8,5 @@ export interface PropRequest {
     articleId: string;
     uid?: string;
     state?: RequestState;
+    time_stamp?: Date;
 }

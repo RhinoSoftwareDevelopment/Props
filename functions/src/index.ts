@@ -15,6 +15,7 @@ export const createRequest = functions.firestore
         const requestId = context.params.requestId;
         const newRequest = snap.data() as PropRequest;
         newRequest.state = RequestState.RECEIVED;
+        newRequest.time_stamp = new Date();
         const newRequestReference = admin.firestore().collection('requests').doc(requestId);
         return newRequestReference.update(newRequest);
     });

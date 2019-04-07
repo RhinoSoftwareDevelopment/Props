@@ -1,0 +1,30 @@
+<mat-card class="example-card" *ngIf="user && article">
+  <mat-card-header>
+    <div mat-card-avatar class="avatar">
+      <img class="submission__avatar" [src]="user.photoURL" [alt]="user.displayName">
+    </div>
+    <mat-card-title>{{ user.displayName }}</mat-card-title>
+    <mat-card-subtitle>{{ request.professor_incharge }}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image class="submission__image" [src]="article.picture_path" [alt]="article.name">
+  <mat-card-content>
+    <p class="mat-body-1">
+      <span class="mat-body-2">Inicio Prestamo: </span> {{ request.begin.toDate() | date:'short' }} <br>
+      <span class="mat-body-2">Fin Prestamo: </span> {{ request.end.toDate() | date:'short' }}
+      <!-- <span class="mat-body-2">Tipo Prestamo: </span> una fecha <br> -->
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <div fxLayout="row">
+      <button mat-icon-button color="warn" fxFlex>
+        <mat-icon (click)="rejectRequest()" aria-label="Example icon-button with a heart icon">clear</mat-icon>
+      </button>
+      <a mat-icon-button [href]="getMailToSrc()" color="accent" fxFlex>
+        <mat-icon aria-label="Example icon-button with a heart icon">reply</mat-icon>
+      </a>
+      <button mat-icon-button color="primary" fxFlex>
+        <mat-icon (click)="acceptRequest()" aria-label="Example icon-button with a heart icon">check</mat-icon>
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>

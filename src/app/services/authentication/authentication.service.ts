@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import { User } from '../../shared/user.model';
 import { Observable, of } from 'rxjs';
@@ -75,6 +75,13 @@ export class AuthenticationService {
    */
   getLoggedUser(): Observable<User> {
     return this.loggedUser$;
+  }
+
+  /**
+   * Gets the user by Id
+   */
+  getUserById(userId: string): Observable<User> {
+    return this.afs.doc<User>(`users/${userId}`).valueChanges();
   }
 
   /**

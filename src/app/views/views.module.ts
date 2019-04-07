@@ -6,6 +6,7 @@ import { RentPropModule } from './rent-prop/rent-prop.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { LandingModule } from './landing/landing.module';
 import { ViewsRoutingModule } from './views-routing.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [],
@@ -15,6 +16,7 @@ import { ViewsRoutingModule } from './views-routing.module';
     RentPropModule,
     AuthenticationModule,
     LandingModule,
+    AdminModule,
     ViewsRoutingModule,
   ],
   exports: [
@@ -22,6 +24,7 @@ import { ViewsRoutingModule } from './views-routing.module';
     RentPropModule,
     AuthenticationModule,
     LandingModule,
+    AdminModule
   ]
 })
 export class ViewsModule { }
