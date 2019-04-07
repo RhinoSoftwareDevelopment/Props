@@ -55,6 +55,10 @@ export class RentFormComponent implements OnInit {
    */
   sendRequest(): void {
     const request = this.rentArticleForm.value as PropRequest;
+    this.addTimeToDate(this.rentArticleForm.value['begin_time'], request.begin);
+    this.addTimeToDate(this.rentArticleForm.value['end_time'], request.end);
+    delete request['begin_time'];
+    delete request['end_time'];
     request.uid = sessionStorage.getItem('uid');
     request.articleId = this.articleToRentId;
     this.requestsService.addRequest(request);
@@ -73,6 +77,18 @@ export class RentFormComponent implements OnInit {
   }
 
   /**
+   * Adds to a date the hours in the string.
+   * @param timeString String of hours to add
+   * @param date Date to add time
+   */
+  private addTimeToDate(timeString: string, date: Date): void {
+    const hours = +timeString.substr(0, 2);
+    const minutes = +timeString.substr(3, 2);
+    date.setHours(hours);
+    date.setMinutes(minutes);
+  }
+
+  /**
    * Builds the FormGroup to rent an article.
    */
   private buildRentArticleForm(): void {
@@ -80,6 +96,8 @@ export class RentFormComponent implements OnInit {
       professor_incharge: ['', Validators.required],
       proyect: ['', Validators.required],
       begin: ['', Validators.required],
+      begin_time: ['', Validators.required],
+      end_time: ['', Validators.required],
       end: ['', Validators.required]
     });
   }

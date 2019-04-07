@@ -30,6 +30,17 @@
                         <mat-datepicker touchUi #end></mat-datepicker>
                     </mat-form-field>
                 </div>
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field appearance="fill" fxFlex="calc(50%-10px)">
+                        <mat-label>Hora Prestamo</mat-label>
+                        <input matInput type="time" formControlName="begin_time" required>
+                        
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" fxFlex="calc(50%-10px)">
+                        <mat-label>Hora Devolución</mat-label>
+                        <input matInput type="time" formControlName="end_time" required>
+                    </mat-form-field>
+                </div>
                 <button mat-raised-button color="accent" type="submit" class="rent-form__button" [disabled]="!rentArticleForm.valid">Enviar solicitud</button>
             </form>
         </div>

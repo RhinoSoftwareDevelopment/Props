@@ -1,0 +1,9 @@
+<app-navbar navbarTittle="Solicitudes" [withSearchButton]="false">
+  <div class="container">
+    <div fxLayout="column" fxLayoutGap="20px">
+      <ng-container *ngFor="let request of pendingRequest">
+        <app-submission-card [request]=request></app-submission-card>
+      </ng-container>
+    </div>
+  </div>
+</app-navbar>
