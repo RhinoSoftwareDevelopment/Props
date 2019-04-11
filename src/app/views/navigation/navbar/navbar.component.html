@@ -31,7 +31,7 @@
       <a [routerLink]="['/requests']" mat-list-item (click)="snav.toggle()" routerLinkActive="sidenav__link--active">
         <mat-icon class="sidenav__icon">notifications_active</mat-icon>Mis Solicitudes
       </a>
-      <a [routerLink]="['/admin/submissions']" mat-list-item (click)="snav.toggle()"
+      <a *ngIf="loggedUser && loggedUser.isAdmin" [routerLink]="['/admin/submissions']" mat-list-item (click)="snav.toggle()"
         routerLinkActive="sidenav__link--active">
         <mat-icon class="sidenav__icon">toys</mat-icon>Admin
       </a>

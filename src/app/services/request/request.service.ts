@@ -24,7 +24,7 @@ export class RequestService {
         .orderBy('time_stamp', 'desc')
         .where('uid', '==', sessionStorage.getItem('uid'))
       );
-    this.adminRequestsCollection = this.afs.collection<PropRequest> (
+    this.adminRequestsCollection = this.afs.collection<PropRequest>(
       this.REQUESTS_COLLECTION_NAME, ref => ref
         .orderBy('time_stamp', 'asc')
         .where('state', '==', RequestState.RECEIVED)
@@ -39,11 +39,16 @@ export class RequestService {
   }
 
   /**
-   * Creates a new request in the database.
+   * Creates a new request in the database. If there
+   * is an error it shows an alert.
    */
   addRequest(newRequest: PropRequest): void {
-    this.requestsCollection.add(newRequest);
-    this.router.navigate(['requests']);
+    this.requestsCollection.add(newRequest)
+      .then(resolve => this.router.navigate(['requests']))
+      .catch(error => {
+        console.error(error);
+        alert('Error Interno, revisa los datos insertados');
+      });
   }
 
   /**
@@ -67,7 +72,11 @@ export class RequestService {
    */
   updateRequestState(newState: RequestState, requestId: string): void {
     const endPoint = this.REQUESTS_COLLECTION_NAME + `/${requestId}`;
-    this.afs.doc<PropRequest>(endPoint).update({state: newState});
+    this.afs.doc<PropRequest>(endPoint).update({ state: newState })
+      .catch(error => {
+        console.error(error);
+        alert('Error Interno, comunicate con el administrador: juan-penaloza@javeriana.edu.co');
+      });
   }
 
 

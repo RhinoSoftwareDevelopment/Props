@@ -8,7 +8,7 @@
 - Mostrar las reglas escritas en firebase
 - Validaciónes de los datos en firebase
 - Mostrar navbar y guards
-- Error al cerrar seción
+- Error al cerrar sesión
 
 ## Tareas
 

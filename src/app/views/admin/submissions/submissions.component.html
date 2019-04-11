@@ -1,9 +1,17 @@
 <app-navbar navbarTittle="Solicitudes" [withSearchButton]="false">
-  <div class="container">
+  <div class="container" *ngIf="pendingRequest">
     <div class="submission" fxLayout="column" fxLayoutGap="20px">
       <ng-container *ngFor="let request of pendingRequest">
         <app-submission-card [request]=request></app-submission-card>
       </ng-container>
+      <ng-container *ngIf="pendingRequest.length === 0">
+        <div class="submission__message">
+          <h2 class="mat-title">
+            ¡Buen Trabajo!<br> No tienes solicitudes pendientes. <br> :)
+          </h2>
+        </div>
+      </ng-container>
+      
     </div>
   </div>
 </app-navbar>
