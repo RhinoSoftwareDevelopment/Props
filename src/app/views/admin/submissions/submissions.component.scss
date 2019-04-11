@@ -1,3 +1,10 @@
 .submission {
     min-height: 100vh;
+
+    &__message {
+        text-align: center;
+        color: #777;
+        margin: auto;
+    }
+
 }

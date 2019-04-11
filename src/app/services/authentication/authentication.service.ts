@@ -16,13 +16,13 @@ export class AuthenticationService {
 
   loggedUser$: Observable<User>;
   isLoggedIn$: Observable<boolean>;
+  isAdmin$: Observable<boolean>;
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
-    // this.loggedUser$ = this.afAuth.authState;
     this.loggedUser$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
@@ -34,7 +34,9 @@ export class AuthenticationService {
       })
     );
     this.isLoggedIn$ = this.afAuth.authState
-      .pipe(map<firebase.User, boolean>(user => user != null) );
+      .pipe(map<firebase.User, boolean>(user => user != null));
+    this.isAdmin$ = this.loggedUser$
+      .pipe(map<User, boolean>(user => user.isAdmin === true));
   }
 
   /**
@@ -52,7 +54,6 @@ export class AuthenticationService {
    * Signs out of firebase.
    */
   async logout(): Promise<boolean> {
-    console.log('To Sign out');
     this.loggedUser$.subscribe().unsubscribe();
     this.isLoggedIn$.subscribe().unsubscribe();
     await this.afAuth.auth.signOut();
@@ -64,7 +65,11 @@ export class AuthenticationService {
    * Updates FireStore with the data of the user.
    * @param userData User's data
    */
-  private updateUserData({uid, email, displayName, photoURL}: User) {
+  private updateUserData({ uid, email, displayName, photoURL }: User) {
+    if (!photoURL) {
+      photoURL = `https://firebasestorage.googleapis.com/v0/b/bookprop-dae19.appspot.com/o/
+      profie.jpg?alt=media&token=efd93a58-64e6-4204-8bb4-78ae723b3a7f`;
+    }
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${uid}`);
     const data = { uid, email, displayName, photoURL };
     return userRef.set(data, { merge: true });
@@ -82,6 +87,43 @@ export class AuthenticationService {
    */
   getUserById(userId: string): Observable<User> {
     return this.afs.doc<User>(`users/${userId}`).valueChanges();
+  }
+
+  /**
+   * Creates a new user account with a password.
+   * @param email User's email
+   * @param password User's password
+   */
+  createUserWithEmailAndPassword(newUser: User, password: string): Promise<void | auth.UserCredential> {
+    return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, password)
+      .then(credential => {
+        newUser.uid = credential.user.uid;
+        sessionStorage.setItem('uid', newUser.uid);
+        this.updateUserData(newUser);
+        this.router.navigate(['catalog']);
+      })
+      .catch(error => {
+        console.error(error);
+        alert('Error al crear usuario\n' + error.message);
+      });
+  }
+
+  /**
+   * Signs in a new user account with a password.
+   * @param email User's email
+   * @param password User's password
+   */
+  signInUserWithEmailAndPassword(email: string, password: string): Promise<void | auth.UserCredential> {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then(credential => {
+        // this.updateUserData(credential.user);
+        sessionStorage.setItem('uid', credential.user.uid);
+        this.router.navigate(['catalog']);
+      })
+      .catch(error => {
+        console.error(error);
+        alert('Error al crear usuario\n' + error.message);
+      });
   }
 
   /**

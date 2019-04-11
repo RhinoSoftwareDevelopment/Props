@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
@@ -13,7 +14,9 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
     CommonModule,
     MaterialDesignModule,
     FlexLayoutModule,
-    AuthenticationRoutingModule
+    AuthenticationRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     LoginComponent,

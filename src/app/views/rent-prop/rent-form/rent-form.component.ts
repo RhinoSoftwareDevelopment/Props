@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Article } from 'src/app/shared/article.model';
 import { PropRequest } from 'src/app/shared/request.model';
 import { ActivatedRoute } from '@angular/router';
@@ -7,17 +7,19 @@ import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { RequestService } from 'src/app/services/request/request.service';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { TeachersService } from 'src/app/services/teachers/teachers.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rent-form',
   templateUrl: './rent-form.component.html',
   styleUrls: ['./rent-form.component.scss']
 })
-export class RentFormComponent implements OnInit {
+export class RentFormComponent implements OnInit, OnDestroy {
 
   private articleToRentId: string;
+  private ngUnsubscribe: Subject<void> = new Subject();
 
   articleToRent: Article;
   faculty_teachers: string[] = [];
@@ -34,11 +36,14 @@ export class RentFormComponent implements OnInit {
 
   ngOnInit() {
     this.buildRentArticleForm();
-    this.route.params.subscribe(params => {
-      this.articleToRentId = params['id'];
-      this.articlesService.getArticleById(params.id)
-        .subscribe(article => this.articleToRent = article);
-    });
+    this.route.params
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(params => {
+        this.articleToRentId = params['id'];
+        this.articlesService.getArticleById(params.id)
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe(article => this.articleToRent = article);
+      });
     this.teachersService.getTeachers().subscribe(teachers => {
       for (const teacher of teachers) {
         this.faculty_teachers.push(teacher.name);
@@ -50,11 +55,16 @@ export class RentFormComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   /**
    * Sends the request to the backend.
    */
   sendRequest(): void {
-    const request = this.rentArticleForm.value as PropRequest;
+    const request = { ...this.rentArticleForm.value as PropRequest };
     this.addTimeToDate(this.rentArticleForm.value['begin_time'], request.begin);
     this.addTimeToDate(this.rentArticleForm.value['end_time'], request.end);
     delete request['begin_time'];

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
@@ -11,14 +12,17 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 export class LoginComponent implements OnInit {
 
   hide = false;
+  loginForm: FormGroup;
 
   constructor(
     private router: Router,
     private location: Location,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.buildLoginForm();
   }
 
   /**
@@ -33,6 +37,15 @@ export class LoginComponent implements OnInit {
    */
   goToRegister(): void {
     this.gotToComponent('register');
+  }
+
+  /**
+   * Logs in with emai and password
+   */
+  loginWithEmailAndPassword(): void {
+    const email = this.loginForm.value['email'];
+    const password = this.loginForm.value['password'];
+    this.authenticationService.signInUserWithEmailAndPassword(email, password);
   }
 
   /**
@@ -59,6 +72,16 @@ export class LoginComponent implements OnInit {
     } catch (e) {
       console.error('Cannot go back.');
     }
+  }
+
+  /**
+   * Builds the login form.
+   */
+  private buildLoginForm(): void {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(5)]]
+    });
   }
 
 }
