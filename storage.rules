@@ -1,7 +1,71 @@
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /{allPaths=**} {
-      allow read, write: if request.auth!=null;
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+   	match /articles/{article} {
+    	allow read: if isSignedIn();
+      allow write: if validateArticle() && isSignedIn() && isAdmin();
     }
+    
+    match /requests/{requestId} {
+    	allow create: if isSignedIn();
+    	allow write: if isSignedIn() && (isAdmin() || isOwner());
+    	allow read: if isSignedIn() && (isAdmin() || isOwner());
+    }
+    
+    match /teachers/{teacher} {
+    	allow write: if isAdmin() && validateTeacher();
+    	allow read: if isSignedIn();
+    }
+    
+    match /users/{user} {
+    	allow create: if true;
+    	allow read, write: if isSignedIn() && (isAdmin() || isOwner());
+    }
+  	
+    function isAdmin() {
+    	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+    }
+    
+    function isUserExisting() {
+    	return exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+    
+    function isSignedIn() {
+    	return request.auth != null && isUserExisting();
+    }
+    
+    function isOwner() {
+    	return resource.data.uid == request.auth.uid;
+    }
+    
+    function isValidState(state) {
+    	return state in ['Recibida', 'Aceptada', 'Rechazada'];
+    }
+    
+    function isValidWarehouse(warehouse) {
+    	return warehouse in ['Bodega aula múltiple', 'Depósito 2', 'Depósito 5', 'Bodega camerino'];
+    }
+    
+    function validateArticle() {
+    	return request.resource.data.details is string &&
+      request.resource.data.isAvailable is bool &&
+      request.resource.data.name is string &&
+      request.resource.data.picture_path is string &&
+      isValidWarehouse(request.resource.data.warehouse_id);
+    }
+    
+    function validateTeacher() {
+    	return request.resource.data.name is string;
+    }
+    
+    function validateRequest() {
+    	return request.resource.data.professor_incharge is string &&
+      request.resource.data.proyect is string &&
+      request.resource.data.begin is timestamp &&
+      request.resource.data.end is timestamp &&
+      request.resource.data.articleId is string &&
+      request.resource.data.time_stamp is timestamp;
+    }
+    
   }
 }

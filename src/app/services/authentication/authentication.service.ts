@@ -17,6 +17,7 @@ export class AuthenticationService {
   loggedUser$: Observable<User>;
   isLoggedIn$: Observable<boolean>;
   isAdmin$: Observable<boolean>;
+  currentUid: string;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -26,6 +27,7 @@ export class AuthenticationService {
     this.loggedUser$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
+          this.currentUid = user.uid;
           sessionStorage.setItem('uid', user.uid);
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {

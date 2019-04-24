@@ -5,6 +5,7 @@ import { PropRequest } from 'src/app/shared/request.model';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { RequestState } from 'src/app/shared/request-state.enum';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,23 +19,18 @@ export class RequestService {
   constructor(
     private afs: AngularFirestore,
     private router: Router,
-  ) {
-    this.requestsCollection = this.afs.collection<PropRequest>
-      (this.REQUESTS_COLLECTION_NAME, ref => ref
-        .orderBy('time_stamp', 'desc')
-        .where('uid', '==', sessionStorage.getItem('uid'))
-      );
-    this.adminRequestsCollection = this.afs.collection<PropRequest>(
-      this.REQUESTS_COLLECTION_NAME, ref => ref
-        .orderBy('time_stamp', 'asc')
-        .where('state', '==', RequestState.RECEIVED)
-    );
-  }
+    private authenticationService: AuthenticationService
+  ) { }
 
   /**
    * Returns all the requests found in the database.
    */
   getRequests(): Observable<PropRequest[]> {
+    this.requestsCollection = this.afs.collection<PropRequest>
+      (this.REQUESTS_COLLECTION_NAME, ref => ref
+        .orderBy('time_stamp', 'desc')
+        .where('uid', '==', sessionStorage.getItem('uid'))
+      );
     return this.requestsCollection.valueChanges();
   }
 
@@ -44,7 +40,7 @@ export class RequestService {
    */
   addRequest(newRequest: PropRequest): void {
     this.requestsCollection.add(newRequest)
-      .then(resolve => this.router.navigate(['requests']))
+      .then(() => this.router.navigate(['requests']))
       .catch(error => {
         console.error(error);
         alert('Error Interno, revisa los datos insertados');
@@ -55,6 +51,11 @@ export class RequestService {
    * Returns all requests who's state is RECEIVED
    */
   getPendingRequests(): Observable<PropRequest[]> {
+    this.adminRequestsCollection = this.afs.collection<PropRequest>(
+      this.REQUESTS_COLLECTION_NAME, ref => ref
+        .orderBy('time_stamp', 'asc')
+        .where('state', '==', RequestState.RECEIVED)
+    );
     return this.adminRequestsCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
