@@ -44,7 +44,6 @@ describe('LandingComponent', () => {
     de = fixture.debugElement;
     router = TestBed.get(Router);
     fixture.detectChanges();
-    // router.initialNavigation();
   });
 
   it('should create', () => {
@@ -54,11 +53,6 @@ describe('LandingComponent', () => {
   it('should have onboarding message', () => {
     expect(de.query(By.css('h1')).nativeElement.innerText).toContain('Bodega');
   });
-
-  // it('should be in the path /', () => {
-  //   const location = TestBed.get(Location);
-  //   expect(location.path()).toBe('');
-  // });
 
   it('should navigate to /login when click button', fakeAsync(() => {
     const location = TestBed.get(Location);
