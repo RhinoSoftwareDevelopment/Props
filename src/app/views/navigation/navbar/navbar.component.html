@@ -5,7 +5,7 @@
         <mat-icon (click)="goBack()">arrow_back</mat-icon>
       </ng-container>
       <ng-template #elseTemplate>
-        <button mat-icon-button (click)="snav.toggle()">
+        <button mat-icon-button id="menu-button" (click)="snav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
       </ng-template>
@@ -17,7 +17,7 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </nav>
-<mat-sidenav-container class="navbar">
+<mat-sidenav-container class="navbar" id="navbar">
 
   <mat-sidenav #snav mode="push" [fixedInViewport]="true" fixedTopGap="56" class="sidenav__list">
     <div class="sidenav__container" fxLayout="column" fxLayoutAlign="space-around stretch">
@@ -25,17 +25,17 @@
       <h3 class="mat-h4">Estudiente</h3>
     </div>
     <mat-nav-list>
-      <a [routerLink]="['/catalog']" mat-list-item (click)="snav.toggle()" routerLinkActive="sidenav__link--active">
+      <a [routerLink]="['/catalog']" mat-list-item (click)="snav.toggle()" id="catalog-link" routerLinkActive="sidenav__link--active">
         <mat-icon class="sidenav__icon">shopping_cart</mat-icon>Catálogo
       </a>
-      <a [routerLink]="['/requests']" mat-list-item (click)="snav.toggle()" routerLinkActive="sidenav__link--active">
+      <a [routerLink]="['/requests']" mat-list-item (click)="snav.toggle()" id="requests-link" routerLinkActive="sidenav__link--active">
         <mat-icon class="sidenav__icon">notifications_active</mat-icon>Mis Solicitudes
       </a>
       <a *ngIf="loggedUser && loggedUser.isAdmin" [routerLink]="['/admin/submissions']" mat-list-item (click)="snav.toggle()"
         routerLinkActive="sidenav__link--active">
         <mat-icon class="sidenav__icon">toys</mat-icon>Admin
       </a>
-      <a mat-list-item (click)="snav.toggle(); logout()">
+      <a mat-list-item id="logout-link" (click)="snav.toggle(); logout()">
         <mat-icon class="sidenav__icon">vpn_key</mat-icon>Logout
       </a>
     </mat-nav-list>

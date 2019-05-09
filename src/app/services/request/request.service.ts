@@ -39,6 +39,11 @@ export class RequestService {
    * is an error it shows an alert.
    */
   addRequest(newRequest: PropRequest): void {
+    this.requestsCollection = this.afs.collection<PropRequest>
+      (this.REQUESTS_COLLECTION_NAME, ref => ref
+        .orderBy('time_stamp', 'desc')
+        .where('uid', '==', sessionStorage.getItem('uid'))
+      );
     this.requestsCollection.add(newRequest)
       .then(() => this.router.navigate(['requests']))
       .catch(error => {
